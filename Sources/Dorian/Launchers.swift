@@ -135,9 +135,17 @@ enum Launchers {
 
 @MainActor
 enum Icons {
-    static let colors: [NSColor] = [0x1E88E5, 0xE53935, 0x43A047, 0xFB8C00, 0x8E24AA, 0x00897B, 0x6D4C41, 0x3949AB]
-        .map { NSColor(srgbRed: CGFloat(($0 >> 16) & 0xFF) / 255, green: CGFloat(($0 >> 8) & 0xFF) / 255,
-                       blue: CGFloat($0 & 0xFF) / 255, alpha: 1) }
+    // Typed hex list plus a helper: one long literal-and-closure expression is
+    // too slow for the type checker on smaller machines (CI).
+    private static let hexColors: [Int] = [0x1E88E5, 0xE53935, 0x43A047, 0xFB8C00, 0x8E24AA, 0x00897B, 0x6D4C41, 0x3949AB]
+    static let colors: [NSColor] = hexColors.map(color)
+
+    private static func color(_ hex: Int) -> NSColor {
+        let red = CGFloat((hex >> 16) & 0xFF) / 255
+        let green = CGFloat((hex >> 8) & 0xFF) / 255
+        let blue = CGFloat(hex & 0xFF) / 255
+        return NSColor(srgbRed: red, green: green, blue: blue, alpha: 1)
+    }
 
     /// One distinct badge letter per profile: the first letter of the name, else
     /// of a later word ("Alex (example.com)" → E next to "Alex" → A), else any
