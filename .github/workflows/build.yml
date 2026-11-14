@@ -1,0 +1,21 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Unit checks
+        run: ./test.sh
+      - name: Build and verify signatures
+        run: DEST="$RUNNER_TEMP/Applications" ./build.sh
+      - name: Verify installed app
+        run: codesign --verify --deep --strict "$RUNNER_TEMP/Applications/Dorian.app"

@@ -126,7 +126,7 @@ The app icon is `Resources/AppIcon.svg`; `build.sh` turns it into `AppIcon.icns`
 ## Contributing
 
 Issues and pull requests are welcome. When reporting a bug, please include your macOS and Chrome versions and the
-relevant lines from `~/Library/Logs/Dorian.log`. [`AGENTS.md`](AGENTS.md) describes the design and the pitfalls.
+relevant lines from `~/Library/Logs/Dorian.log`. Run `./test.sh` before opening a pull request; CI runs it too. [`AGENTS.md`](AGENTS.md) describes the design and the pitfalls.
 
 ## License
 
