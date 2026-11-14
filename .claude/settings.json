@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./build.sh)",
+      "Bash(swiftc:*)",
+      "Bash(codesign --verify:*)",
+      "Bash(codesign -dv:*)",
+      "Bash(plutil -lint:*)"
+    ]
+  }
+}

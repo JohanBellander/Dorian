@@ -1,0 +1,5 @@
+.claude/settings.local.json
+.agent/
+.claude/worktrees/
+build/
+.DS_Store
