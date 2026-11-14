@@ -178,19 +178,7 @@ enum Icons {
             NSGraphicsContext.restoreGraphicsState()
             guard let overlay else { return true }
 
-            let d = style.size * grid.width, b = d / 2, r = gridRadius * k, margin = 16 * k
-            // How far from the grid's edges a circle of radius b sits when it
-            // touches the rounded corner (or both edges, once b reaches the radius).
-            let inset = (b >= r ? b : r - (r - b) / 2.squareRoot()) + margin
-            let x: CGFloat, y: CGFloat
-            switch style.position {
-            case .center: (x, y) = (grid.midX, grid.midY)
-            case .topLeft: (x, y) = (grid.minX + inset, grid.maxY - inset)
-            case .topRight: (x, y) = (grid.maxX - inset, grid.maxY - inset)
-            case .bottomLeft: (x, y) = (grid.minX + inset, grid.minY + inset)
-            case .bottomRight: (x, y) = (grid.maxX - inset, grid.minY + inset)
-            }
-            let badge = NSRect(x: x - b, y: y - b, width: d, height: d)
+            let badge = overlayRect(style, in: rect), d = badge.width
             let inner = badge.insetBy(dx: d * 0.07, dy: d * 0.07)
             NSColor.white.setFill()
             NSBezierPath(ovalIn: badge).fill()
@@ -212,6 +200,27 @@ enum Icons {
             }
             return true
         }
+    }
+
+    /// The overlay's circle on an icon drawn in `canvas`, placed by `style` and
+    /// always inside the grid's rounded square.
+    static func overlayRect(_ style: OverlayStyle, in canvas: NSRect) -> NSRect {
+        let k = canvas.width / 1024
+        let grid = NSRect(x: canvas.minX + gridOrigin * k, y: canvas.minY + gridOrigin * k,
+                          width: gridSide * k, height: gridSide * k)
+        let d = style.size * grid.width, b = d / 2, r = gridRadius * k, margin = 16 * k
+        // How far from the grid's edges a circle of radius b sits when it
+        // touches the rounded corner (or both edges, once b reaches the radius).
+        let inset = (b >= r ? b : r - (r - b) / 2.squareRoot()) + margin
+        let x: CGFloat, y: CGFloat
+        switch style.position {
+        case .center: (x, y) = (grid.midX, grid.midY)
+        case .topLeft: (x, y) = (grid.minX + inset, grid.maxY - inset)
+        case .topRight: (x, y) = (grid.maxX - inset, grid.maxY - inset)
+        case .bottomLeft: (x, y) = (grid.minX + inset, grid.minY + inset)
+        case .bottomRight: (x, y) = (grid.maxX - inset, grid.minY + inset)
+        }
+        return NSRect(x: x - b, y: y - b, width: d, height: d)
     }
 
     /// Draws `image` to cover `rect`, keeping its aspect ratio (the caller clips).

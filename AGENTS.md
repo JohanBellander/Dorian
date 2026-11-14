@@ -30,7 +30,9 @@ working). Intended for open-source release (MIT); built from source on the user'
 ## Commands
 - Build and install: `./build.sh` (env: `DORIAN_BUNDLE_ID`, `SIGN_IDENTITY`, `DEST`)
 - Verify signatures: `codesign --verify --deep --strict ~/Applications/Dorian.app`
-- No automated tests yet. Verify by hand: open Dorian, create launchers, `open` a launcher and read
+- Unit checks: `./test.sh` (Profiles-menu detection, launcher keys, badge letters, overlay placement). CI
+  (`.github/workflows/build.yml`) runs it and `build.sh` on every PR.
+- AX switching can only be tested by hand: open Dorian, create launchers, `open` a launcher and read
   `~/Library/Logs/Dorian.log`. Count Chrome windows (CGWindowList) to prove no new window was opened.
 
 ## Conventions

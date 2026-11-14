@@ -1,4 +1,5 @@
 prefix_rule(pattern=["./build.sh"], decision="allow", justification="Build and install Dorian")
+prefix_rule(pattern=["./test.sh"], decision="allow", justification="Run unit checks")
 prefix_rule(pattern=["swiftc"], decision="allow", justification="Compile Swift sources")
 prefix_rule(pattern=["codesign", "--verify"], decision="allow", justification="Verify signatures")
 prefix_rule(pattern=["codesign", "-dv"], decision="allow", justification="Show signature details")

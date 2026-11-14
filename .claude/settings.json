@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(./build.sh)",
+      "Bash(./test.sh)",
       "Bash(swiftc:*)",
       "Bash(codesign --verify:*)",
       "Bash(codesign -dv:*)",
