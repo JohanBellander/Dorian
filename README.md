@@ -27,7 +27,10 @@ Dorian gives each profile its own app in the Dock. Click it and Dorian presses t
 and opens a window only if the profile has none. Chrome stays your normal, single install.
 
 <p align="center">
-  <img src="docs/launchers.png" width="640" alt="Example Dock icons with letter and picture overlays">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/setup-dark.png">
+    <img src="docs/setup-light.png" width="560" alt="The Dorian window listing three Chrome profiles with their Dock icons">
+  </picture>
 </p>
 
 ## Features
@@ -62,6 +65,10 @@ This builds `Dorian.app` and installs it in `~/Applications`.
 4. Drag the new `Chrome - <Profile>` apps from the Finder window that opens to your Dock.
 
 ### Customise the icons
+
+<p align="center">
+  <img src="docs/launchers.png" width="640" alt="Example Dock icons with letter and picture overlays">
+</p>
 
 - **Icon → Overlay:** a coloured letter (the default), a **Picture…** you choose, or **None**.
 - **Icon → Background:** Chrome's icon (the default), or an **Image…** you choose.
